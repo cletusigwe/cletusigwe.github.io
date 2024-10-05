@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content"
+const allPosts = await getCollection("blog")
+interface Post {
+  title: string;
+  href: string;
+}
+interface CategorizedPosts {
+  [category: string]: Post[];
+}
+const categorizedPosts: CategorizedPosts = {};
+
+allPosts.forEach(post => {
+  const { slug, data } = post;
+  const {title, category} = data; 
+  const href = `/${slug}`;
+
+  if (!categorizedPosts[category]) {
+    categorizedPosts[category] = [];
+  }
+  categorizedPosts[category].push({ title, href });
+});
+
+const sortedCategorizedPosts = Object.fromEntries(Object.entries(categorizedPosts).sort(([a], [b]) => a.localeCompare(b)))
+---
+<header class="hidden sm:block bg-grey col-span-full md:col-span-3 lg:col-span-2 h-[70vh] rounded-sm p-3 overflow-y-scroll">
+    <p class="mx-auto w-fit mb-4 text-orange font-semibold text-sm">Writings</p>
+    <div class="h-full w-full flex flex-col gap-3">
+        {Object.entries(sortedCategorizedPosts).map(([category, posts]) => {
+            return (
+                <ul class="w-full">
+                    <p class="text-xs text-orange font-semibold capitalize mb-1">{category}</p>
+                    {posts.map((post) => {
+                        return (
+                            <li class="ml-3 mb-2">
+                                <a href={post.href} class="text-sm whitespace-nowrap text-ellipsis overflow-hidden text-ash w-full">
+                                    {post.title}
+                                </a>
+                            </li>
+                        );
+                    })}
+                </ul>
+            );
+        })}
+        <p class="text-center">nothing written yet</p>
+    </div>
+</header>

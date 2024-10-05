@@ -1,0 +1,41 @@
+---
+import emailIcon from "../svg/email.svg?raw"
+import githubIcon from "../svg/github.svg?raw"
+import substackIcon from "../svg/substack.svg?raw"
+import lichessIcon from "../svg/lichess.svg?raw"
+import twitterIcon from "../svg/twitter.svg?raw"
+import telegramIcon from "../svg/telegram.svg?raw"
+import youtubeIcon from "../svg/youtube.svg?raw"
+import instagramIcon from "../svg/instagram.svg?raw"
+import twitchIcon from "../svg/twitch.svg?raw"
+import facebookIcon from "../svg/facebook.svg?raw"
+import redditIcon from "../svg/reddit.svg?raw"
+import tiktokIcon from "../svg/tiktok.svg?raw"
+import BrandIcon from "./BrandIcon.astro"
+---
+<footer class="font-ibmMono bg-grey col-span-full rounded-sm p-2 md:p-3 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 font-semibold text-ash">
+    <div class="grid md:flex grid-rows-2 grid-cols-9 h-full items-center gap-4 md:gap-10 text-xs md:text-base">
+        <BrandIcon href="mailto:me@cletusigwe.com" iconRaw={emailIcon}/>
+        <BrandIcon href="https://x.com/0xcletusigwe" iconRaw={twitterIcon}/>
+        <BrandIcon href="https://github.com/cletusigwe" iconRaw={githubIcon}/>
+        <BrandIcon href="https://lichess.org/@/cletusigwe" iconRaw={lichessIcon} />
+        <BrandIcon href="https://t.me/cletusigwe_channel" iconRaw={telegramIcon}/>
+        <BrandIcon href="https://cletusigwe.substack.com/" iconRaw={substackIcon} />
+        <BrandIcon href="https://youtube.com/@cletusigwe" iconRaw={youtubeIcon}/>
+        <BrandIcon href="https://instagram.com/0xcletusigwe" iconRaw={instagramIcon} />
+        <BrandIcon href="https://twitch.com/cletusigwe" iconRaw={twitchIcon} />
+        <!-- <BrandIcon href="https://facebook.com/0xcletusigwe" iconRaw={facebookIcon} /> -->
+        <BrandIcon href="https://www.youtube.com/watch?v=cvh0nX08nRw" iconRaw={facebookIcon} />
+        <BrandIcon href="https://www.reddit.com/user/cletusigwe/" iconRaw={redditIcon} />
+        <BrandIcon href="https://www.tiktok.com/@0xcletusigwe" iconRaw={tiktokIcon} />
+        <!-- <div class="border-b-2 border-b-orange cursor-pointer">
+            follow me on social media
+        </div>
+        <div class="border-b-2 border-b-orange cursor-pointer">
+            watch my videos
+        </div> -->
+    </div>
+    <div class="flex items-center gap-2 text-[8px] md:text-xs">
+        &copy; <span>Cletus Igwe</span> | {new Date().getFullYear()}
+    </div>
+</footer>

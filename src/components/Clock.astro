@@ -1,0 +1,40 @@
+<div class="flex justify-end mb-1">
+   <div class="w-fit flex gap-1">
+       <span id="clock_hour"></span> 
+       <span class="text-yellowLight">:</span>
+       <span id="clock_minute"></span> 
+       <span class="text-yellowLight">:</span>
+       <span id="clock_second"></span>
+   </div>
+</div>
+
+<script>
+    // Function to format time to always show two digits
+    const formatTime = (time: number): string => {
+        return time < 10 ? `0${time}` : `${time}`;
+    };
+
+    // Function to update the clock
+    const updateClock = (): void => {
+        const clockHour = document.getElementById("clock_hour");
+        const clockMinute = document.getElementById("clock_minute");
+        const clockSecond = document.getElementById("clock_second");
+
+        if (clockHour && clockMinute && clockSecond) {
+            const now = new Date();
+            const hours = formatTime(now.getHours());
+            const minutes = formatTime(now.getMinutes());
+            const seconds = formatTime(now.getSeconds());
+            
+            clockHour.innerHTML=hours;
+            clockMinute.innerHTML=minutes;
+            clockSecond.innerHTML=seconds;
+        }
+    };
+
+    // Initial clock update
+    updateClock();
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+</script>

@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logGreen {
+  background-color: green;
+}
+.logDark {
+  background-color: darkgrey;
+}
+
+
+@layer utilities {
+  *::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply bg-gray-500;
+  }
+}
+
+
+@layer base {
+  .markdownContent {
+    max-width: 700px;
+    /* Headings */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-bold text-ash border-b-[3px] border-b-orange my-2 w-fit font-ibmMono;
+    }
+    h1 {
+      @apply text-2xl md:text-3xl;
+    }
+    h2 {
+      @apply text-xl md:text-2xl;
+    }
+    h3 {
+      @apply text-lg md:text-xl;
+    }
+    h4 {
+      @apply text-base md:text-lg;
+    }
+    h5 {
+      @apply text-sm md:text-base;
+    }
+    h6 {
+      @apply text-xs md:text-sm;
+    }
+
+    /* Paragraphs and lists */
+    p,
+    ul,
+    ol {
+      @apply mb-3 text-sm md:text-base text-ash;
+    }
+    ul,
+    ol {
+      @apply pl-10;
+    }
+    li {
+      @apply mb-2;
+    }
+    ul {
+      list-style-type: square;
+    }
+    ol {
+      @apply list-decimal;
+    }
+    li::marker {
+      @apply text-emphasizedContentLight text-xs md:text-sm font-semibold font-ibmMono;
+    }
+
+    /* Links */
+    a {
+      @apply text-blue border-b-2 border-b-blue hover:text-cyan;
+    }
+    a::after {
+      content: "↗";
+      font-size: 10px;
+    }
+
+    strong {
+      @apply font-ibmMono text-sm;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      @apply pl-4 border-l-4 border-orange border-opacity-70 italic my-6 text-emphasizedContentLight;
+    }
+
+    pre {
+      @apply rounded-lg p-3 overflow-x-auto my-6 border-2 border-grey;
+    }
+    pre code {
+      @apply bg-transparent text-ash p-0 block md:text-base text-sm;
+    }
+
+    /* Inline code */
+    :not(pre) > code {
+      @apply bg-backgroundHighlightDark text-magenta rounded px-2 py-0.5 font-ibmMono font-semibold text-[10px] md:text-sm;
+    }
+
+    /* Horizontal rule */
+    hr {
+      @apply my-8 border-t border-emphasizedContent;
+    }
+
+    /* Tables */
+    table {
+      @apply w-full my-6 border-collapse;
+    }
+    th,
+    td {
+      @apply border-2 border-emphasizedContent px-4 py-2 text-ash md:text-base text-sm;
+    }
+    th {
+      @apply bg-grey font-semibold font-ibmMono text-emphasizedContentLight text-xs md:text-sm;
+    }
+    small {
+      @apply text-[8px];
+    }
+    kbd {
+      @apply bg-gray-200 rounded px-1 py-0.5 text-sm font-bold text-gray-800 inline-block border border-gray-400 shadow-sm whitespace-nowrap;
+    }
+    em {
+      @apply border-b-2 border-b-orange;
+    }
+    abbr {
+      @apply relative cursor-help underline decoration-dotted;
+    }
+    abbr:hover::after,
+    abbr:focus::after {
+      @apply content-[attr(title)] absolute left-0 -bottom-6 whitespace-nowrap bg-black text-white rounded px-1 py-0.5 text-xs z-10;
+    }
+    /* Images */
+    img {
+      @apply my-4 rounded-sm border-2 border-emphasizedContent p-2;
+    }
+  }
+}

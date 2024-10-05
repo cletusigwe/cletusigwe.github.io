@@ -1,0 +1,51 @@
+---
+import "../tailwind.css"
+import { getCollection } from "astro:content"
+const allPosts = await getCollection("blog")
+import Footer from "../components/Footer.astro"
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+		<!-- Atkinson Hyperlegible -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+		
+		<!-- IBM mono -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap">
+
+		<title>Cletus Igwe | blog</title>
+	</head>
+	<body class="bg-black font-atkinson gap-3 grid grid-cols-12 p-2 md:p-3">
+		<main class="bg-grey p-3 col-start-1 col-span-full h-full min-h-[85vh] md:min-h-[90vh] rounded-sm text-white flex flex-col gap-5 md:gap-7">
+			<p class="text-ash border-b-2 border-b-blue w-fit text-xs md:text-sm">Essays, tutorials, reflections, long rants and everything inbetween</p>
+            <ul class="pl-0 md:pl-16 w-full max-w-[1200px] h-full flex flex-col gap-3">
+                {allPosts.map((post, _)=>{
+                    return (
+						<li class="bg-black">
+							<a href={post.slug} class="p-3 flex justify-between items-center">
+							<span class="capitalize text-sm md:text-base font-ibmMono text-ash font-semibold max-w-[70%] whitespace-nowrap text-ellipsis overflow-hidden">{post.data.title}</span>
+							<span class="text-xs md:text-sm text-white text-opacity-30">
+								{post.data.pubDate.toLocaleString('en-US', {year: 'numeric',month: 'short',day: 'numeric'})}
+							</span>
+							</a>
+						</li>
+					)
+                })}
+            </ul>
+		</main>
+		<Footer/>
+	</body>
+</html>
+
+<!-- TODO: add the comment feature with https://giscus.app/, add meta tags for authour etc and meta-og tags too -->

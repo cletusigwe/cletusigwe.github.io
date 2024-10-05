@@ -1,0 +1,12 @@
+---
+interface Props {
+    iconRaw: string;
+    href: string
+}
+
+const {iconRaw, href} = Astro.props
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" class="bg-ash flex justify-center items-center p-[3px] md:p-1">
+    <Fragment set:html={iconRaw} />
+</a>

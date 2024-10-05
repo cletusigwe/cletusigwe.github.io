@@ -1,0 +1,90 @@
+<div>
+    <p class="text-ash font-bold border-b-2 border-b-orange w-fit mx-auto mb-3 font-ibmMono text-xs md:text-sm">Blog Activity</p>
+    <div class="bg-black w-full h-fit flex">
+        <div class="pt-8 md:pt-10 w-20 flex-grow my-2">
+            <div class="h-full grid grid-rows-7 text-xs text-ash font-semibold font-ibmMono *:px-2">
+                <p id="day-1" class="row-start-1 flex items-start border-y border-y-gray-800  py-2"></p>
+                <p id="day-2" class="row-start-3 flex items-start border-y border-y-gray-800  py-2"></p>
+                <p id="day-3" class="row-start-5 flex items-center border-y border-y-gray-800  py-2"></p>
+                <p id="day-4" class="row-start-7 flex items-end border-y border-y-gray-800  py-2"></p>
+            </div>
+        </div>
+        <div class="overflow-x-scroll my-2">
+            <div class="min-w-full h-8 md:h-10  grid grid-cols-12 gap-4 text-xs md:text-sm font-semibold text-ash *:border-x *:border-b *:border-gray-800" id="monthsBar">
+                <div class="flex justify-center items-center">Jan</div>
+                <div class="flex justify-center items-center">Feb</div>
+                <div class="flex justify-center items-center">Mar</div>
+                <div class="flex justify-center items-center">Apr</div>
+                <div class="flex justify-center items-center">May</div>
+                <div class="flex justify-center items-center">Jun</div>
+                <div class="flex justify-center items-center">Jul</div>
+                <div class="flex justify-center items-center">Aug</div>
+                <div class="flex justify-center items-center">Sep</div>
+                <div class="flex justify-center items-center">Oct</div>
+                <div class="flex justify-center items-center">Nov</div>
+                <div class="flex justify-center items-center">Dec</div>
+            </div>
+            <div class="w-fit grid grid-cols-12 gap-4 min-w-[1800px]" id="meLogs">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const monthsBar = document.getElementById('monthsBar');
+    const meLogs = document.getElementById('meLogs');
+
+    if (monthsBar && meLogs) {
+        monthsBar.style.width = `${meLogs.scrollWidth}px`;
+        window.addEventListener('resize', () => {
+            monthsBar.style.width = `${meLogs.scrollWidth}px`;
+        });
+    }
+    function getDaysInMonths(year: number) {
+        const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+
+        if (isLeapYear(year)) {
+            daysInMonths[1] = 29;
+        }
+
+        return daysInMonths;
+    }
+
+    const specificYear = 2024;
+    const daysInMonths = getDaysInMonths(specificYear)
+    const firstDayOfSpecificYear = new Date(specificYear, 0, 1);
+    const firstDayOfWeek = firstDayOfSpecificYear.getDay();
+
+    const dayOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+    const day1 = document.getElementById('day-1')
+    const day2 = document.getElementById('day-2')
+    const day3 = document.getElementById('day-3')
+    const day4 = document.getElementById('day-4')
+
+    if(day1 && day2 && day3 && day4 && meLogs){
+        day1.textContent = dayOfWeek[firstDayOfWeek];
+        day2.textContent = dayOfWeek[(firstDayOfWeek + 2) % 7];
+        day3.textContent = dayOfWeek[(firstDayOfWeek + 4) % 7];
+        day4.textContent = dayOfWeek[(firstDayOfWeek + 6) % 7];
+
+        daysInMonths.forEach((monthLength, _) => {
+            const monthDiv = document.createElement('div')
+            monthDiv.className = "grid grid-cols-4 grid-rows-7 gap-3 grid-flow-col border-x border-x-gray-800"
+            for (let day = 0; day < monthLength; day++){
+                const logDiv = document.createElement('div');
+                let workDone = Math.random()
+                logDiv.className = `${workDone > 0.4 ? "logGreen" : "logDark"} size-3 rounded-sm m-2 cursor-pointer`;
+                if(workDone > 0){
+                    logDiv.style.opacity = `${workDone+0.1}`;
+                }
+                monthDiv.appendChild(logDiv);
+            }
+            meLogs.appendChild(monthDiv)
+        });
+    }
+
+</script>

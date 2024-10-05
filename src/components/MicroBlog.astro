@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+
+const microPosts = await Promise.all(
+  (await getCollection('microblog')).map(async (post) => {
+    const {Content} = await post.render();
+    return {
+      ...post,
+      Content, 
+    }
+  })
+);
+
+const parsePubDateFromSlug = (slug: string): string => {
+  const [date, time] = slug.split('/');
+  return new Date(`${date}T${time.replace(/-/g, ':')}`).toLocaleString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric', 
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true,
+});
+};
+---
+
+<div>
+    <p class="text-ash font-bold border-b-2 border-b-orange w-fit mx-auto mb-3 font-ibmMono text-xs md:text-sm">Micro Blog</p>
+    <div class="bg-black w-full max-h-[1000px] overflow-y-scroll flex flex-col gap-3 p-2">
+        {microPosts.reverse().map((post)=>{
+            const pubDate = parsePubDateFromSlug(post.slug)
+            return (
+                <div class="p-2 rounded-sm w-full h-fit border border-grey flex flex-col gap-1">
+                     <p class="text-xs flex justify-end text-ash">{pubDate}</p>
+                     <div class="markdownContent px-2">
+                        <post.Content/>
+                     </div>
+                </div>
+            )
+        })}
+    </div>
+</div>
+

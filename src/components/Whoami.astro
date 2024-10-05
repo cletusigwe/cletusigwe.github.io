@@ -1,0 +1,40 @@
+---
+import Clock from "../components/Clock.astro"
+import { getEntry } from "astro:content"
+const intro = await getEntry("standalones", "intro")
+const {Content} = await intro.render()
+---
+<div class="h-fit lg:col-span-3">
+    <div class="font-ibmMono text-xs md:text-sm mb-1 font-semibold flex items-start justify-between">
+        <Clock/>
+        <a href="/blog" class="border-b-2 border-b-blue">Blog</a>
+    </div>
+    <div class="p-1 border-2 border-grey bg-black rounded-sm w-fit float-left mr-3 mb-1">
+        <img src="/pfp.jpg" alt="pfp" title="Professional Retard" class="w-16 md:w-24 cursor-pointer" id="pfp_image">
+    </div>
+    <div class="markdownContent">
+        <Content/>
+    </div>
+</div>
+
+<!-- <script>
+    const imageElement = document.getElementById("pfp_image") as HTMLImageElement;
+    const originalImage = "/dancing_pepe.gif";
+    // const newImage = "/pepe_watching.jpg";
+    const newImage = "/pfp.jpg";
+
+    let isOriginal = true; 
+
+    function alternateImage() {
+        if (imageElement){
+            if (isOriginal) {
+            imageElement.src = newImage; 
+            } else {
+            imageElement.src = originalImage;
+            }
+        }
+        isOriginal = !isOriginal;
+    }
+
+    setInterval(alternateImage, 5000);
+</script> -->
