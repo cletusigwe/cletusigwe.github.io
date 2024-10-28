@@ -107,7 +107,7 @@
 
     /* Inline code */
     :not(pre) > code {
-      @apply bg-backgroundHighlightDark text-magenta rounded px-2 py-0.5 font-ibmMono font-semibold text-[10px] md:text-sm;
+      @apply bg-backgroundHighlightDark text-yellowLight rounded px-2 py-0.5 font-ibmMono font-semibold text-[10px] md:text-sm;
     }
 
     /* Horizontal rule */
