@@ -6,7 +6,7 @@ if echo "$GOOGLE_CHECK" | grep -q "200"; then # internet is up
     echo "Internet is up"
     set -xe
     if [ -n "$(git status "$(pwd)/src/content/microblog" --porcelain)" ]; then #new content has been added
-        bun run build
+        bunx astro build
         COMMIT_MSG="Update Content at $(date)"
         git add .
         git commit -m "$COMMIT_MSG"
